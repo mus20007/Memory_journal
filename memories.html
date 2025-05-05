@@ -44,14 +44,15 @@
 
   <script src="script.js"></script>
   <!-- Music Player -->
+<!-- Add this right before </body> -->
 <div class="music-player">
-  <div id="nowPlaying">No song playing</div>
   <button id="musicToggle">▶️ Play</button>
-  <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.7">
+  <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.5">
 </div>
 
-<audio id="bgMusic">
-  <source src="music/anything.mp3" type="audio/mpeg">
-</audio>
+<!-- Use EITHER local file OR online sample -->
+<audio id="bgMusic" src="music/anything.mp3"></audio>
+<!-- OR -->
+<audio id="bgMusic" src="https://assets.mixkit.co/music/preview/mixkit-piano-melody-1110.mp3"></audio>
 </body>
 </html>
