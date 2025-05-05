@@ -43,5 +43,15 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- Music Player -->
+<div class="music-player">
+  <div id="nowPlaying">No song playing</div>
+  <button id="musicToggle">▶️ Play</button>
+  <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.7">
+</div>
+
+<audio id="bgMusic">
+  <source src="music/your-song.mp3" type="audio/mpeg">
+</audio>
 </body>
 </html>
