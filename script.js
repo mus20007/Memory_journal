@@ -147,60 +147,28 @@ document.addEventListener("DOMContentLoaded", () => {
 const bgMusic = document.getElementById("bgMusic");
 const musicToggle = document.getElementById("musicToggle");
 const volumeControl = document.getElementById("volumeControl");
-const nowPlaying = document.getElementById("nowPlaying");
 
-// Song configuration (add more for playlist)
-const songs = [{
-  title: "Memory Theme",
-  file: "music/calm-piano.mp3" // Change to your file
-}];
+// 1. Initialize when page loads
+bgMusic.volume = 0.5;
 
-// Initialize
-let currentSong = 0;
-bgMusic.volume = 0.7;
-updateSongInfo();
-
-// Fade effects
-function fadeAudio(direction) {
-  const fadeInterval = setInterval(() => {
-    if (direction === "in") {
-      bgMusic.volume = Math.min(bgMusic.volume + 0.05, volumeControl.value);
-    } else {
-      bgMusic.volume = Math.max(bgMusic.volume - 0.05, 0);
-    }
-    
-    if (bgMusic.volume === 0 || bgMusic.volume === volumeControl.value) {
-      clearInterval(fadeInterval);
-    }
-  }, 100);
-}
-
-// Update display
-function updateSongInfo() {
-  nowPlaying.textContent = songs[currentSong].title;
-}
-
-// Controls
+// 2. Play/pause toggle
 musicToggle.addEventListener("click", () => {
   if (bgMusic.paused) {
-    bgMusic.src = songs[currentSong].file;
-    bgMusic.play();
-    fadeAudio("in");
-    musicToggle.textContent = "⏸️ Pause";
+    bgMusic.play()
+      .then(() => musicToggle.textContent = "⏸️ Pause")
+      .catch(() => alert("Click anywhere on page first!"));
   } else {
-    fadeAudio("out");
-    setTimeout(() => bgMusic.pause(), 500);
+    bgMusic.pause();
     musicToggle.textContent = "▶️ Play";
   }
 });
 
+// 3. Volume control
 volumeControl.addEventListener("input", () => {
   bgMusic.volume = volumeControl.value;
 });
 
-// Auto-start after user interaction
-document.addEventListener("click", () => {
-  bgMusic.play().then(() => {
-    musicToggle.textContent = "⏸️ Pause";
-  }).catch(e => console.log("Auto-play prevented"));
+// 4. Unlock audio (required by browsers)
+document.body.addEventListener("click", () => {
+  bgMusic.play().then(() => bgMusic.pause());
 }, { once: true });
