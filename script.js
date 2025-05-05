@@ -187,6 +187,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { once: true });
 });
 <!-- Add to memories.html before </body> -->
+  <div class="player-header">
+    <div id="nowPlaying">Loading...</div>
+    <div id="loadingSpinner" class="spinner"></div>
+  </div>
+  
+  <div class="visualizer">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  
+  <div class="player-controls">
+    <button id="prevSong">⏮</button>
+    <button id="musicToggle">▶️</button>
+    <button id="nextSong">⏭</button>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
+    <span id="volumePercent">50%</span>
+  </div>
+</div>
+  <script src="script.js"></script>
+  <!-- Add to memories.html before </body> -->
 <div class="music-player">
   <div class="player-header">
     <div id="nowPlaying">Loading...</div>
@@ -211,3 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <audio id="bgMusic"></audio>
+</body>
+</html>
+
+
