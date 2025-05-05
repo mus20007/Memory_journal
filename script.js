@@ -186,3 +186,28 @@ document.addEventListener('DOMContentLoaded', () => {
     bgMusic.play().then(() => bgMusic.pause()); // Unlocks audio
   }, { once: true });
 });
+<!-- Add to memories.html before </body> -->
+<div class="music-player">
+  <div class="player-header">
+    <div id="nowPlaying">Loading...</div>
+    <div id="loadingSpinner" class="spinner"></div>
+  </div>
+  
+  <div class="visualizer">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  
+  <div class="player-controls">
+    <button id="prevSong">⏮</button>
+    <button id="musicToggle">▶️</button>
+    <button id="nextSong">⏭</button>
+    <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.5">
+    <span id="volumePercent">50%</span>
+  </div>
+</div>
+
+<audio id="bgMusic"></audio>
