@@ -160,10 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let isPlaying = false;
 
   // Play/pause handler
-  musicToggle.addEventListener("click", async () => {
-    try {
-      if (isPlaying) {
-        await bgMusic.pause();
+  
         musicToggle.textContent = "▶️ Play";
       } else {
         await bgMusic.play();
@@ -177,9 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Volume control
-  volumeControl.addEventListener("input", () => {
-    bgMusic.volume = volumeControl.value;
-  });
+ 
 
   // Enable audio after first interaction
   document.body.addEventListener("click", () => {
@@ -236,5 +231,104 @@ document.addEventListener('DOMContentLoaded', () => {
 <audio id="bgMusic"></audio>
 </body>
 </html>
+// ====== MUSIC PLAYER 2.0 ======
+const songs = [
+  {
+    title: "Gentle Memories",
+    url: "https://assets.mixkit.co/music/preview/mixkit-piano-1173.mp3"
+  },
+  {
+    title: "Quiet Reflections", 
+    url: "https://assets.mixkit.co/music/preview/mixkit-relaxing-1251.mp3"
+  },
+  {
+    title: "Soft Melancholy",
+    url: "https://assets.mixkit.co/music/preview/mixkit-emotional-51.mp3"
+  }
+];
+
+const bgMusic = new Audio();
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+const analyser = ctx.createAnalyser();
+let source, dataArray;
+let currentSong = 0;
+let isPlaying = false;
+
+// Initialize
+function initPlayer() {
+  // Visualizer setup
+  source = ctx.createMediaElementSource(bgMusic);
+  source.connect(analyser);
+  analyser.connect(ctx.destination);
+  analyser.fftSize = 64;
+  dataArray = new Uint8Array(analyser.frequencyBinCount);
+  
+  // Load first song
+  loadSong(currentSong);
+}
+
+function loadSong(index) {
+  document.getElementById("loadingSpinner").style.display = "block";
+  document.getElementById("nowPlaying").textContent = "Loading...";
+  
+  bgMusic.src = songs[index].url;
+  bgMusic.load();
+  
+  bgMusic.oncanplay = () => {
+    document.getElementById("nowPlaying").textContent = songs[index].title;
+    document.getElementById("loadingSpinner").style.display = "none";
+    if (isPlaying) bgMusic.play();
+  };
+}
+
+// Visualizer animation
+function updateVisualizer() {
+  if (!isPlaying) return;
+  
+  analyser.getByteFrequencyData(dataArray);
+  const bars = document.querySelectorAll(".visualizer .bar");
+  
+  bars.forEach((bar, i) => {
+    const height = dataArray[i] / 2;
+    bar.style.height = `${height}px`;
+    bar.style.backgroundColor = `hsl(${200 + height}, 100%, 50%)`;
+  });
+  
+  requestAnimationFrame(updateVisualizer);
+}
+
+// Control handlers
+document.getElementById("musicToggle").addEventListener("click", () => {
+  if (isPlaying) {
+    bgMusic.pause();
+  } else {
+    bgMusic.play();
+    if (!source) initPlayer();
+    updateVisualizer();
+  }
+  isPlaying = !isPlaying;
+  document.getElementById("musicToggle").textContent = isPlaying ? "⏸️" : "▶️";
+});
+
+document.getElementById("volumeControl").addEventListener("input", (e) => {
+  bgMusic.volume = e.target.value;
+  document.getElementById("volumePercent").textContent = 
+    `${Math.round(e.target.value * 100)}%`;
+});
+
+document.getElementById("prevSong").addEventListener("click", () => {
+  currentSong = (currentSong - 1 + songs.length) % songs.length;
+  loadSong(currentSong);
+});
+
+document.getElementById("nextSong").addEventListener("click", () => {
+  currentSong = (currentSong + 1) % songs.length;
+  loadSong(currentSong);
+});
+
+// Initialize on first interaction
+document.body.addEventListener("click", () => {
+  initPlayer();
+}, { once: true });
 
 
