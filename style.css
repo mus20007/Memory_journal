@@ -245,24 +245,91 @@ body {
   #image-input {
     display: none; /* Hides the default file input */
   }
+/* ===== MUSIC PLAYER STYLES ===== */
 .music-player {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Caveat', cursive;
+  z-index: 1000;
 }
 
-#musicToggle {
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#nowPlaying {
+  font-size: 1.2rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(139, 90, 43, 0.3);
+  border-radius: 50%;
+  border-top-color: #8b5a2b;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.visualizer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 50px;
+  margin: 15px 0;
+}
+
+.visualizer .bar {
+  width: 12%;
+  background: #8b5a2b;
+  border-radius: 3px;
+  transition: height 0.2s ease-out;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-controls button {
   background: #8b5a2b;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#volumeControl {
+  flex-grow: 1;
+}
+
+#volumePercent {
+  width: 40px;
+  text-align: center;
+  font-size: 0.9rem;
 }
   /* ====== END OF ADDITIONS ====== */
