@@ -143,3 +143,64 @@ document.addEventListener("DOMContentLoaded", () => {
     deletePopup.style.display = "none";
   });
 });
+// ====== MUSIC PLAYER ======
+const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+const volumeControl = document.getElementById("volumeControl");
+const nowPlaying = document.getElementById("nowPlaying");
+
+// Song configuration (add more for playlist)
+const songs = [{
+  title: "Memory Theme",
+  file: "music/calm-piano.mp3" // Change to your file
+}];
+
+// Initialize
+let currentSong = 0;
+bgMusic.volume = 0.7;
+updateSongInfo();
+
+// Fade effects
+function fadeAudio(direction) {
+  const fadeInterval = setInterval(() => {
+    if (direction === "in") {
+      bgMusic.volume = Math.min(bgMusic.volume + 0.05, volumeControl.value);
+    } else {
+      bgMusic.volume = Math.max(bgMusic.volume - 0.05, 0);
+    }
+    
+    if (bgMusic.volume === 0 || bgMusic.volume === volumeControl.value) {
+      clearInterval(fadeInterval);
+    }
+  }, 100);
+}
+
+// Update display
+function updateSongInfo() {
+  nowPlaying.textContent = songs[currentSong].title;
+}
+
+// Controls
+musicToggle.addEventListener("click", () => {
+  if (bgMusic.paused) {
+    bgMusic.src = songs[currentSong].file;
+    bgMusic.play();
+    fadeAudio("in");
+    musicToggle.textContent = "⏸️ Pause";
+  } else {
+    fadeAudio("out");
+    setTimeout(() => bgMusic.pause(), 500);
+    musicToggle.textContent = "▶️ Play";
+  }
+});
+
+volumeControl.addEventListener("input", () => {
+  bgMusic.volume = volumeControl.value;
+});
+
+// Auto-start after user interaction
+document.addEventListener("click", () => {
+  bgMusic.play().then(() => {
+    musicToggle.textContent = "⏸️ Pause";
+  }).catch(e => console.log("Auto-play prevented"));
+}, { once: true });
