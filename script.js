@@ -159,19 +159,23 @@ document.addEventListener('DOMContentLoaded', () => {
   bgMusic.volume = 0.5;
   let isPlaying = false;
 
-  // Play/pause handler
-  
-        musicToggle.textContent = "▶️ Play";
-      } else {
-        await bgMusic.play();
-        musicToggle.textContent = "⏸️ Pause";
-      }
-      isPlaying = !isPlaying;
-    } catch (error) {
-      console.error("Playback error:", error);
-      alert("Please click anywhere on the page first to enable audio");
+// Play/pause handler
+musicToggle.addEventListener("click", async () => {
+  try {
+    if (isPlaying) {
+      bgMusic.pause();
+      musicToggle.textContent = "▶️ Play";
+    } else {
+      await bgMusic.play();
+      musicToggle.textContent = "⏸️ Pause";
     }
-  });
+    isPlaying = !isPlaying;
+  } catch (error) {
+    console.error("Playback error:", error);
+    alert("Please click anywhere on the page first to enable audio");
+  }
+});
+
 
   // Volume control
  
