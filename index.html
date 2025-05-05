@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Journal</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Font for a handwritten feel -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="first-page">
+  <div class="center-content">
+    <h1>Welcome to My Memory Journal</h1>
+    <p class="subtitle">Preserve your favorite moments, one image at a time.</p>
+    <button id="memories-button" class="journal-button">Flip Through Memories</button>
+  </div>
+  <footer class="journal-footer">Made with ❤️</footer>
+
+  <script>
+    document.getElementById("memories-button").addEventListener("click", () => {
+      window.location.href = "memories.html";
+    });
+  </script>
+</body>
+</html>

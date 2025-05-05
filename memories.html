@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Memory Journal</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Add the same font as index.html -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="memories-page">
+  <header>
+    <h1>My Memory Journal</h1>
+    <a href="index.html" class="back-button">← Back to Home</a>
+  </header>
+
+  <!-- Upload Section (Now with Preview) -->
+  <div class="upload-container">
+    <input type="file" id="image-input" accept="image/*" multiple>
+    <button id="upload-button">Upload</button>
+  </div>
+    <div id="image-preview" class="image-preview"></div> <!-- New: Preview before adding -->
+  </div>
+
+  <!-- Carousel (Upgraded for animations) -->
+  <div class="memory-carousel-container">
+    <div class="memory-carousel" id="memory-carousel">
+      <!-- Images will be injected via JavaScript -->
+    </div>
+  </div>
+
+  <!-- Controls (Styled like journal buttons) -->
+  <div class="carousel-controls">
+    <button id="prev" class="journal-button">← Previous</button>
+    <button id="next" class="journal-button">Next →</button>
+  </div>
+
+  <!-- Delete Confirmation Popup -->
+  <div id="delete-popup" class="delete-popup hidden">
+    <p>Delete this memory?</p>
+    <button id="confirm-delete" class="journal-button delete-btn">Delete</button>
+    <button id="cancel-delete" class="journal-button">Cancel</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

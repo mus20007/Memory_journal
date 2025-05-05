@@ -1,0 +1,248 @@
+/* === General Styles === */
+body {
+    font-family: 'Caveat', cursive;
+    background-color: #f9f3e9;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    color: #5a3e36; /* Earthy brown */
+  }
+  
+  /* === Homepage (index.html) === */
+  body.first-page {
+    background-image: url('https://transparenttextures.com/patterns/cream-paper.png');
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .center-content {
+    padding: 2rem;
+    max-width: 800px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .subtitle {
+    font-size: 1.5rem;
+    color: #7a6a5f;
+    margin-bottom: 2rem;
+  }
+  
+  .journal-button {
+    background: #8b5a2b;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-family: 'Caveat', cursive;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .journal-button:hover {
+    background: #6d4a2a;
+    transform: scale(1.05);
+  }
+  
+  .journal-button:active {
+    transform: scale(0.98);
+  }
+  
+  .journal-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem;
+    color: #7a6a5f;
+    font-size: 1rem;
+  }
+  
+  /* === Memories Page (memories.html) === */
+  body.memories-page {
+    padding: 2rem;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .back-button {
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: #8b5a2b;
+    text-decoration: none;
+    transition: transform 0.2s;
+  }
+  
+  .back-button:hover {
+    transform: translateX(-4px);
+  }
+  
+  .upload-container {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  #image-input {
+    display: none; /* Hide default input */
+  }
+  
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  .image-preview img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #e0d0c0;
+  }
+  
+  /* === Carousel Styles === */
+  .memory-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+    max-width: 800px;
+    border: 10px solid #e0d0c0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .memory-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 400px;
+  }
+  
+  .memory {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .memory img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+  }
+  
+  .memory img:hover {
+    transform: scale(1.02);
+  }
+  
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* === Delete Popup === */
+  .delete-popup {
+    position: fixed;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    text-align: center;
+    display: none; /* Changed from .hidden */
+  }
+  
+  .delete-popup p {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .delete-btn {
+    background: #d9534f !important; /* Red for delete */
+    margin-right: 10px;
+  }
+  
+  /* === Responsive Design === */
+  @media (max-width: 768px) {
+    .memory-carousel-container {
+      height: 300px;
+    }
+  
+    .memory-carousel {
+      height: 300px;
+    }
+  
+    h1 {
+      font-size: 2rem;
+    }
+  }
+  /* Hide the default file input */
+#image-input {
+    display: none;
+  }
+  
+  /* Style the upload button */
+  #upload-button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  
+  #upload-button:hover {
+    background: #45a049;
+  }
+  /* ====== ADD THESE NEW LINES ====== */
+.memory-carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    height: 400px;
+  }
+  
+  .memory {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .memory img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  
+  #image-input {
+    display: none; /* Hides the default file input */
+  }
+  /* ====== END OF ADDITIONS ====== */
