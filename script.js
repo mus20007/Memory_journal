@@ -144,31 +144,45 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 // ====== MUSIC PLAYER ======
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
-const volumeControl = document.getElementById("volumeControl");
-
-// 1. Initialize when page loads
-bgMusic.volume = 0.5;
-
-// 2. Play/pause toggle
-musicToggle.addEventListener("click", () => {
-  if (bgMusic.paused) {
-    bgMusic.play()
-      .then(() => musicToggle.textContent = "⏸️ Pause")
-      .catch(() => alert("Click anywhere on page first!"));
-  } else {
-    bgMusic.pause();
-    musicToggle.textContent = "▶️ Play";
+document.addEventListener('DOMContentLoaded', () => {
+  const bgMusic = document.getElementById("bgMusic");
+  const musicToggle = document.getElementById("musicToggle");
+  const volumeControl = document.getElementById("volumeControl");
+  
+  // Safety check - only run if elements exist
+  if (!bgMusic || !musicToggle || !volumeControl) {
+    console.error("Music elements missing!");
+    return;
   }
-});
 
-// 3. Volume control
-volumeControl.addEventListener("input", () => {
-  bgMusic.volume = volumeControl.value;
-});
+  // Initialize with default volume
+  bgMusic.volume = 0.5;
+  let isPlaying = false;
 
-// 4. Unlock audio (required by browsers)
-document.body.addEventListener("click", () => {
-  bgMusic.play().then(() => bgMusic.pause());
-}, { once: true });
+  // Play/pause handler
+  musicToggle.addEventListener("click", async () => {
+    try {
+      if (isPlaying) {
+        await bgMusic.pause();
+        musicToggle.textContent = "▶️ Play";
+      } else {
+        await bgMusic.play();
+        musicToggle.textContent = "⏸️ Pause";
+      }
+      isPlaying = !isPlaying;
+    } catch (error) {
+      console.error("Playback error:", error);
+      alert("Please click anywhere on the page first to enable audio");
+    }
+  });
+
+  // Volume control
+  volumeControl.addEventListener("input", () => {
+    bgMusic.volume = volumeControl.value;
+  });
+
+  // Enable audio after first interaction
+  document.body.addEventListener("click", () => {
+    bgMusic.play().then(() => bgMusic.pause()); // Unlocks audio
+  }, { once: true });
+});
